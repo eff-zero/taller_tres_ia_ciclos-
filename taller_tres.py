@@ -35,3 +35,41 @@ if (cantidad_carros > 0):
         print(f'El color {color} tiene {cantidad} carros')
 else:
     print('Cantida invalida de carros. Debe ser mayor a 0')
+
+
+# 2.
+opcion_ani = int(input('Eliga el animal a estudiar [1, 2 ó 3]\n'
+                       '1. Elefantes\n'
+                       '2. Jirafas\n'
+                       '3. Chimpancés\n'
+                       '»» '))
+
+
+def porcentajes(opcion_ani):
+    cantidad_ani = {1: 20, 2: 15, 3: 40}
+    nombre_ani = {1: 'Elefante', 2: 'Jirafa', 3: 'Chimpancé'}
+    edad_ani = {'0 a 1 año': 0, '1 a 3 años': 0, 'mayor de 3 años': 0}
+
+    for i in range(cantidad_ani[opcion_ani]):
+        edad = int(input(f'Ingrese la edad del {nombre_ani[opcion_ani]} '
+                         f'#{i + 1}: '))
+        if (edad >= 0 and edad <= 1):
+            edad_ani['0 a 1 año'] = edad_ani['0 a 1 año'] + 1
+        elif (edad > 1 and edad < 3):
+            edad_ani['1 a 3 años'] = edad_ani['1 a 3 años'] + 1
+        else:
+            edad_ani['mayor de 3 años'] = edad_ani['mayor de 3 años'] + 1
+
+    for rango, valor in edad_ani.items():
+        edad_ani[rango] = (valor * 100) / cantidad_ani[opcion_ani]
+    return edad_ani, nombre_ani
+
+
+if (opcion_ani > 0 and opcion_ani < 4):
+    porcentajes, nombre_ani = porcentajes(opcion_ani)
+    print('')
+    for edad, porcentaje in porcentajes.items():
+        print(f'El porcentaje de {nombre_ani[opcion_ani]}s de '
+              f'{edad} de edad es de {porcentaje}%')
+else:
+    print('Opción de animal no valida')
