@@ -150,3 +150,26 @@ if (num_hombres >= 0 and num_mujeres >= 0):
         print(f'Promedio {sexo} es de {promedio} años')
 else:
     print('Número de hombres o mujeres invalido')
+
+
+# 5.
+cantidad_de_numeros = int(input('Ingrese la cantidad de números: '))
+
+
+def numeros_en_set(cantidad_de_numeros):
+    numeros = set()
+    for n in range(cantidad_de_numeros):
+        num = float(input(f'Ingrese su número #{n + 1}: '))
+        numeros.add(num)
+    return numeros
+
+
+if (cantidad_de_numeros > 0):
+    numeros = numeros_en_set(cantidad_de_numeros)
+    menor = numeros.pop()
+    for i in numeros:
+        if (i < menor):
+            menor = i
+    print(f'\nEl número menos es {menor}')
+else:
+    print('Cantidad de números invalidos')
