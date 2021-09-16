@@ -73,3 +73,35 @@ if (opcion_ani > 0 and opcion_ani < 4):
               f'{edad} de edad es de {porcentaje}%')
 else:
     print('Opción de animal no valida')
+
+# 3.
+cantidad_obreros = int(input('Ingrese la cantidad de obreros laborando: '))
+
+
+def salarios(cantidad_obreros):
+    pago_normal = 20
+    pago_extra = 25
+    horas_normales = 40
+    salarios = []
+
+    for i in range(cantidad_obreros):
+        horas = int(input(f'Número de horas del trabajador #{i + 1}: '))
+        if (horas <= 40):
+            salarios.append(horas * pago_normal)
+        else:
+            horas_extras = horas - horas_normales  # 51-40 = 11
+            pago_extra = pago_extra * horas_extras  # 25*11 = 275
+            pago_normal = pago_normal * horas_normales  # 20*40 = 800
+            salarios.append(pago_normal + pago_extra)
+    return salarios
+
+
+if (cantidad_obreros > 0):
+    salarios = salarios(cantidad_obreros)
+    indice = 1
+    print('')
+    for salario in salarios:
+        print(f'Al trabajador #{indice} le corresponden ${salario:,}')
+        indice += 1
+else:
+    print('Cantidad de obreros invalida')
