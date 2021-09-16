@@ -105,3 +105,48 @@ if (cantidad_obreros > 0):
         indice += 1
 else:
     print('Cantidad de obreros invalida')
+
+
+# 4.
+num_hombres = int(input('Ingrese el número de hombres: '))
+num_mujeres = int(input('Ingrese el número de mujeres: '))
+
+
+def calcular_promedios(num_hombres, num_mujeres):
+    promedio = {'hombres': 0, 'mujeres': 0, 'total': 0}
+    sum_edades_hombres = 0
+    sum_edades_mujeres = 0
+    promedio_hombre = 0
+    promedio_mujer = 0
+
+    if (num_hombres != 0):
+        for h in range(num_hombres):
+            edad = int(input(f'Ingrese la edad del hombre #{h + 1}: '))
+            sum_edades_hombres = sum_edades_hombres + edad
+        promedio_hombre = sum_edades_hombres / num_hombres
+
+    if (num_mujeres != 0):
+        for m in range(num_mujeres):
+            edad = int(input(f'Ingrese la edad de la mujer #{m + 1}: '))
+            sum_edades_mujeres = sum_edades_mujeres + edad
+        promedio_mujer = sum_edades_mujeres / num_mujeres  #
+
+    if (num_mujeres != 0 or num_hombres != 0):
+        sum_total_edades = sum_edades_hombres + sum_edades_mujeres
+        num_total = num_hombres + num_mujeres
+        promedio_total = sum_total_edades / num_total  #
+
+    promedio['hombres'] = round(promedio_hombre)
+    promedio['mujeres'] = round(promedio_mujer)
+    promedio['total'] = round(promedio_total)
+
+    return promedio
+
+
+if (num_hombres >= 0 and num_mujeres >= 0):
+    promedios = calcular_promedios(num_hombres, num_mujeres)
+    print('')
+    for sexo, promedio in promedios.items():
+        print(f'Promedio {sexo} es de {promedio} años')
+else:
+    print('Número de hombres o mujeres invalido')
