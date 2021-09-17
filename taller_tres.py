@@ -245,3 +245,50 @@ def obtener_total_compra(seguir_agregando=True):
 
 gasto_total = obtener_total_compra()
 print(f'\nEl gasto total de su compra debe ser de ${gasto_total:,}')
+
+
+# 8.
+precio_asiento = float(input('Ingrese el precio del los asientos: '))
+cantidad_clientes = int(input('Ingrese el número de clientes: '))
+
+
+def perdidas_por_categoria(precio_asiento, cantidad_clientes):
+    categoria = {'5 a 14': [0, 0.35],
+                 '15 a 19': [0, 0.25],
+                 '20 a 45': [0, 0.10],
+                 '46 a 65': [0, 0.25],
+                 '66 ó más': [0, 0.35]
+                 }
+    # {[categoria]: [perdida, descuento%]}
+    indice = 0
+    while(cantidad_clientes):
+        edad = int(input(f'Por favor ingrese su edad ({indice + 1}): '))
+        if (edad > 4 and edad < 15):
+            descuento = precio_asiento * categoria['5 a 14'][1]
+            categoria['5 a 14'][0] = categoria['5 a 14'][0] + descuento
+        elif (edad > 14 and edad < 20):
+            descuento = precio_asiento * categoria['15 a 19'][1]
+            categoria['15 a 19'][0] = categoria['15 a 19'][0] + descuento
+        elif (edad > 19 and edad < 46):
+            descuento = precio_asiento * categoria['20 a 45'][1]
+            categoria['20 a 45'][0] = categoria['20 a 45'][0] + descuento
+        elif (edad > 45 and edad < 66):
+            descuento = precio_asiento * categoria['46 a 65'][1]
+            categoria['46 a 65'][0] = categoria['46 a 65'][0] + descuento
+        elif (edad >= 66):
+            descuento = precio_asiento * categoria['66 ó más'][1]
+            categoria['66 ó más'][0] = categoria['66 ó más'][0] + descuento
+        else:
+            print('Edad no valida')
+            indice -= 1
+        indice += 1
+    return categoria
+
+
+if (precio_asiento > 0 and cantidad_clientes > 0):
+    perdidas = perdidas_por_categoria(precio_asiento, cantidad_clientes)
+    print('')
+    for categoria, vector in perdidas.items():
+        print(f'La categoria de {categoria} años perdió: ${vector[0]:,}')
+else:
+    print('Cantidad de asientos o clientes no valido')
