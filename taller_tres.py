@@ -173,3 +173,48 @@ if (cantidad_de_numeros > 0):
     print(f'\nEl número menos es {menor}')
 else:
     print('Cantidad de números invalidos')
+
+
+# 6.
+def ingresar_ultimo_peso(num_miembros):
+    ultimo_peso = []
+    for m in range(num_miembros):
+        peso = float(input(f'Digite el último peso del miembro {m + 1}: '))
+        ultimo_peso.append(peso)
+    return ultimo_peso
+
+
+def calc_peso_actual(num_miembros, num_de_pesajes):
+    peso_actual = []
+    for m in range(num_miembros):
+        acumulador_peso = 0
+        for b in range(num_de_pesajes):
+            peso = float(input(f'Peso mostrado en la báscula #{b+1} '
+                               f'del miembro ({m + 1}): '))
+            acumulador_peso = acumulador_peso + peso
+        promedio_peso = acumulador_peso / num_de_pesajes
+        peso_actual.append(promedio_peso)
+        print('')
+    return peso_actual
+
+
+def diferencia_pesos(num_miembros=5, num_de_pesajes=10):
+    ultimo_peso = ingresar_ultimo_peso(num_miembros)
+    print('')
+    peso_actual = calc_peso_actual(num_miembros, num_de_pesajes)
+    diferencia_pesos = []
+
+    for indice, promedio_peso in enumerate(peso_actual):
+        dif_peso = promedio_peso - ultimo_peso[indice]
+        diferencia_pesos.append(dif_peso)
+    return diferencia_pesos
+
+
+vector_diferencias = diferencia_pesos()
+for indice, dif in enumerate(vector_diferencias):
+    if (dif > 0):
+        print(f'El miembro #{indice + 1} subió de peso')
+    elif (dif == 0):
+        print(f'El miembro #{indice + 1} tiene mismo peso')
+    else:
+        print(f'El miembro bajó #{indice + 1} de peso')
