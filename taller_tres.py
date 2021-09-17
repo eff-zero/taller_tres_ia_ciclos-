@@ -218,3 +218,30 @@ for indice, dif in enumerate(vector_diferencias):
         print(f'El miembro #{indice + 1} tiene mismo peso')
     else:
         print(f'El miembro bajó #{indice + 1} de peso')
+
+
+# 7.
+def obtener_total_compra(seguir_agregando=True):
+    indice = 1
+    acumulador_gastos = 0
+    while(seguir_agregando):
+        valor_articulo = float(input(f'Valor del artículo #{indice}: '))
+        cantidad_articulo = float(input(f'cantidad del artículo #{indice}: '))
+        if (valor_articulo > 0 and cantidad_articulo > 0):
+            gasto = valor_articulo * cantidad_articulo
+            acumulador_gastos = acumulador_gastos + gasto
+        else:
+            print('\nCantidad o valor no valido')
+            indice -= 1
+        seguir_agregando = int(input('¿Desea seguir comprando?\n'
+                                     '1. Sí\n'
+                                     '0. No\n'
+                                     '»» '))
+        if (seguir_agregando):
+            indice += 1
+        else:
+            return acumulador_gastos
+
+
+gasto_total = obtener_total_compra()
+print(f'\nEl gasto total de su compra debe ser de ${gasto_total:,}')
