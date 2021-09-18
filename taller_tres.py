@@ -335,3 +335,62 @@ for i, venta_comision in enumerate(venta_y_comisiones):
     print(f'Vendedor #{i+1}\n'
           f'Vendió: {venta_comision[0]:,}\n'
           f'Comisión: {venta_comision[1]:,}\n')
+
+
+# 10.
+def votacion(numero_votos=50000):
+    votacion = [0, 0, 0]
+    i = 0
+    while (numero_votos != i):
+        voto = int(input(f'¿Por cúal candidato desea votar? [Voto #{i+1}]\n'
+                         '1. Candidato 1\n'
+                         '2. Candidato 2\n'
+                         '3. Candidato 3\n'
+                         '»» '))
+        if (voto == 1):
+            votacion[0] = votacion[0] + 1
+        elif (voto == 2):
+            votacion[1] = votacion[1] + 1
+        elif (voto == 3):
+            votacion[2] = votacion[2] + 1
+        else:
+            print('Opción de voto no valida, elija entre 1, 2, ó 3')
+            i -= 1
+        i += 1
+    return votacion
+
+
+def voto_repetidos(votacion):
+    votos_repetidos = []
+    valor_repetido = 0
+    for indice, votos in enumerate(votacion):
+        if (votacion.count(votos) > 1):
+            votos_repetidos.append(indice)
+    if (votos_repetidos):
+        valor_repetido = votacion[votos_repetidos[0]]
+        return votos_repetidos, valor_repetido
+    else:
+        return votos_repetidos, valor_repetido
+
+
+votacion = votacion()
+votacion_mayor = max(votacion)
+votos_repetidos, valor_repetido = voto_repetidos(votacion)
+indice_voto_mayor = votacion.index(votacion_mayor)
+
+print('')
+for indice, votos in enumerate(votacion):
+    print(f'El candidato #{indice + 1} obtuvo: {votos:,} voto(s)')
+
+if (votos_repetidos):
+    if (valor_repetido == votacion_mayor):
+        print('')
+        for candidatos in votos_repetidos:
+            print(f'El candidato #{candidatos + 1} ha empatado '
+                  f'con: {votacion_mayor:,} voto(s)')
+    else:
+        print(f'\nEl ganador es el candidato #{indice_voto_mayor + 1} '
+              f'con: {votacion_mayor:,} voto(s)')
+else:
+    print(f'\nEl ganador es el candidato #{indice_voto_mayor + 1} '
+          f'con: {votacion_mayor:,} voto(s)')
