@@ -261,7 +261,7 @@ def perdidas_por_categoria(precio_asiento, cantidad_clientes):
                  }
     # {[categoria]: [perdida, descuento%]}
     indice = 0
-    while(cantidad_clientes):
+    while(cantidad_clientes != indice):
         edad = int(input(f'Por favor ingrese su edad ({indice + 1}): '))
         if (edad > 4 and edad < 15):
             descuento = precio_asiento * categoria['5 a 14'][1]
@@ -292,3 +292,46 @@ if (precio_asiento > 0 and cantidad_clientes > 0):
         print(f'La categoria de {categoria} años perdió: ${vector[0]:,}')
 else:
     print('Cantidad de asientos o clientes no valido')
+
+
+# 9.
+def calc_comision(cantidad_vendedores=2):
+    total_comision_y_venta = []
+    indice = 0
+    while(cantidad_vendedores != indice):
+        comision_y_venta = []  # [venta, comision]
+        vendido = float(input(f'Valor vendido por empleado #{indice + 1}: '))
+        if (vendido > 0 and vendido <= 20000000):  # 10%
+            comision = vendido * 0.10
+            comision_y_venta.append(vendido)   # [0] » [venta]
+            comision_y_venta.append(comision)  # [0][1] » [venta, comision]
+        elif (vendido > 20000000 and vendido < 40000000):  # 15%
+            comision = vendido * 0.15
+            comision_y_venta.append(vendido)
+            comision_y_venta.append(comision)
+        elif (vendido >= 40000000 and vendido < 80000000):  # 20%
+            comision = vendido * 0.20
+            comision_y_venta.append(vendido)
+            comision_y_venta.append(comision)
+        elif (vendido >= 80000000 and vendido < 160000000):  # 25%
+            comision = vendido * 0.25
+            comision_y_venta.append(vendido)
+            comision_y_venta.append(comision)
+        elif (vendido >= 160000000):  # 30%
+            comision = vendido * 0.30
+            comision_y_venta.append(vendido)
+            comision_y_venta.append(comision)
+        else:
+            print('Valor de venta invalido')
+            indice -= 1
+        indice += 1
+        total_comision_y_venta.append(comision_y_venta)
+    return total_comision_y_venta
+
+
+venta_y_comisiones = calc_comision()
+print('')
+for i, venta_comision in enumerate(venta_y_comisiones):
+    print(f'Vendedor #{i+1}\n'
+          f'Vendió: {venta_comision[0]:,}\n'
+          f'Comisión: {venta_comision[1]:,}\n')
